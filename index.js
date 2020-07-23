@@ -39,6 +39,22 @@ client.on('message', msg => {
 
     case 'perillafact+usage': {
 
+      if (msg.channel.type !== 'text') {
+        logfile.write(`ignored invocation of: perillafact+usage. reason: not text channel. type: ${msg.channel.type}`)
+        return
+      }
+      const chan = msg.channel.toString()
+      const channame = msg.channel.name
+      const svname = msg.channel.guild.toString()
+      const author = msg.author
+      if (author === undefined || author === null) {
+        logfile.write(`ignored invocation of: perillafact+usage. reason: who is author?`)
+        return
+      }
+      const user = author.toString()
+      const username = author.username
+      logfile.write(`invoked: perillafact+usage by ${user} (@${username}) in ${msg.channel} (#${msg.channel.name}, ${msg.channel.guild}).`)
+
       msg.channel.send(`
 \`perillafact+usage\` -- this help
 **\`perillafact\` -- print a random perillafact**
@@ -47,10 +63,27 @@ client.on('message', msg => {
 \`perillafact+exact <idx>\` -- print the perillafact of specified index
 \`perillafact+leave\` -- do not use if you exactly know what are you doing
       `)
+
       break
     }
 
     case 'perillafact': {
+
+      if (msg.channel.type !== 'text') {
+        logfile.write(`ignored invocation of: perillafact. reason: not text channel. type: ${msg.channel.type}`)
+        return
+      }
+      const chan = msg.channel.toString()
+      const channame = msg.channel.name
+      const svname = msg.channel.guild.toString()
+      const author = msg.author
+      if (author === undefined || author === null) {
+        logfile.write(`ignored invocation of: perillafact. reason: who is author?`)
+        return
+      }
+      const user = author.toString()
+      const username = author.username
+      logfile.write(`invoked: perillafact by ${user} (@${username}) in ${msg.channel} (#${msg.channel.name}, ${msg.channel.guild}).`)
 
       const dbdirents = fs.readdirSync('./db').sort()
       const dbfiles = dbdirents.map(e => `./db/${e}`)
@@ -63,10 +96,27 @@ client.on('message', msg => {
       const dbrandcontent = fs.readFileSync(dbrandfile)
       msg.channel.send(dbrandcontent.toString())
       last = next
+
       break
     }
 
     case 'perillafact+count': {
+
+      if (msg.channel.type !== 'text') {
+        logfile.write(`ignored invocation of: perillafact+count. reason: not text channel. type: ${msg.channel.type}`)
+        return
+      }
+      const chan = msg.channel.toString()
+      const channame = msg.channel.name
+      const svname = msg.channel.guild.toString()
+      const author = msg.author
+      if (author === undefined || author === null) {
+        logfile.write(`ignored invocation of: perillafact+count. reason: who is author?`)
+        return
+      }
+      const user = author.toString()
+      const username = author.username
+      logfile.write(`invoked: perillafact+count by ${user} (@${username}) in ${msg.channel} (#${msg.channel.name}, ${msg.channel.guild}).`)
 
       const dbdirents = fs.readdirSync('./db').sort()
       const dbfiles = dbdirents.map(e => `./db/${e}`)
@@ -76,16 +126,50 @@ client.on('message', msg => {
 
     case 'perillafact+last': {
 
+      if (msg.channel.type !== 'text') {
+        logfile.write(`ignored invocation of: perillafact+last. reason: not text channel. type: ${msg.channel.type}`)
+        return
+      }
+      const chan = msg.channel.toString()
+      const channame = msg.channel.name
+      const svname = msg.channel.guild.toString()
+      const author = msg.author
+      if (author === undefined || author === null) {
+        logfile.write(`ignored invocation of: perillafact+last. reason: who is author?`)
+        return
+      }
+      const user = author.toString()
+      const username = author.username
+      logfile.write(`invoked: perillafact+last by ${user} (@${username}) in ${msg.channel} (#${msg.channel.name}, ${msg.channel.guild}).`)
+
       if (last === undefined)
         msg.channel.send('No perillafact has been called upon.')
       else
         msg.channel.send(`Last perillafact (index not specified) was: # ${last}.`)
+
       break
     }
 
-    case 'perillafact+leave': {
+    case 'perillafact+turnoff': {
+
+      if (msg.channel.type !== 'text') {
+        logfile.write(`ignored invocation of: perillafact+turnoff. reason: not text channel. type: ${msg.channel.type}`)
+        return
+      }
+      const chan = msg.channel.toString()
+      const channame = msg.channel.name
+      const svname = msg.channel.guild.toString()
+      const author = msg.author
+      if (author === undefined || author === null) {
+        logfile.write(`ignored invocation of: perillafact+turnoff. reason: who is author?`)
+        return
+      }
+      const user = author.toString()
+      const username = author.username
+      logfile.write(`invoked: perillafact+turnoff by ${user} (@${username}) in ${msg.channel} (#${msg.channel.name}, ${msg.channel.guild}).`)
 
       msg.channel.send('bye').then(client.destroy)
+
       break
     }
   }
