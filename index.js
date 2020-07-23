@@ -16,6 +16,7 @@ client.on('message', msg => {
   switch (msg.content) {
 
     case 'perillafact+usage': {
+
       msg.channel.send(`
 \`perillafact+usage\` -- this help
 **\`perillafact\` -- print a random perillafact**
@@ -28,6 +29,7 @@ client.on('message', msg => {
     }
 
     case 'perillafact': {
+
       const dbdirents = fs.readdirSync('./db').sort()
       const dbfiles = dbdirents.map(e => `./db/${e}`)
       let next = Math.floor(Math.random() * dbfiles.length)
@@ -43,6 +45,7 @@ client.on('message', msg => {
     }
 
     case 'perillafact+count': {
+
       const dbdirents = fs.readdirSync('./db').sort()
       const dbfiles = dbdirents.map(e => `./db/${e}`)
       msg.channel.send(`Fact: ${dbfiles.length} perillafacts about mint verified.`)
@@ -50,6 +53,7 @@ client.on('message', msg => {
     }
 
     case 'perillafact+last': {
+
       if (last === undefined)
         msg.channel.send('No perillafact has been called upon.')
       else
@@ -58,6 +62,7 @@ client.on('message', msg => {
     }
 
     case 'perillafact+leave': {
+
       msg.channel.send('bye').then(client.destroy)
       break
     }
@@ -65,13 +70,16 @@ client.on('message', msg => {
 
   const match = (/^perillafact\+exact\ ([0-9]+)$/).exec(msg.content)
   while (match !== null) {
+
     const idx = 1 * match[1]
     const dbdirents = fs.readdirSync('./db').sort()
     const dbfiles = dbdirents.map(e => `./db/${e}`)
+
     if (idx >= dbfiles.length) {
       msg.channel.send(`Error: only ${dbfiles.length} perillafacts are found yet, while requested perillafact # ${idx}`)
       break
     }
+
     const dbselfile = dbfiles[idx]
     const dbselcontent = fs.readFileSync(dbselfile)
     msg.channel.send(dbselcontent.toString())
