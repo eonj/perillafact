@@ -61,7 +61,7 @@ client.on('message', msg => {
 \`perillafact+count\` -- print the total count of verified perillafacts
 \`perillafact+last\` -- you can show the index (0-based) of recent random perillafact printed
 \`perillafact+exact <idx>\` -- print the perillafact of specified index
-\`perillafact+leave\` -- do not use if you exactly know what are you doing
+\`perillafact+turnoff\` -- do not use if you exactly know what are you doing
       `)
 
       break
