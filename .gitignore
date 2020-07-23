@@ -1,5 +1,13 @@
+# NPM & Yarn
 node_modules/
 package-lock.json
 yarn.lock
+
+# editor
 .vscode/
+
+# perillafact bot client-secret
 config.json
+
+# perillafact bot log
+log/

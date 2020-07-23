@@ -5,6 +5,28 @@ const { token } = require('./config.json')
 
 let last = undefined
 
+const logfile = {
+
+  prepare() {
+
+    if (!fs.existsSync('./log')) {
+      fs.mkdirSync('./log')
+    }
+  },
+
+  write(content) {
+
+    const date = new Date()
+    const dateisostr = date.toISOString()
+    const logfile = `./log/${dateisostr}`
+    fs.writeFileSync(logfile, content)
+  },
+
+}
+
+logfile.prepare()
+logfile.write('perillafact is on')
+
 client.on('ready', () => {
 
   console.log(`Logged in as ${client.user.tag}!`);
@@ -92,7 +114,8 @@ client.login(token)
 
 process.on('SIGINT', () => {
 
-  console.log("\rCaught SIGINT. Exiting.")
+  console.log('\rCaught SIGINT. Exiting.')
+  logfile.write('perillafact is off')
   client.destroy()
   process.exit()
 
